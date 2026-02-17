@@ -1,4 +1,70 @@
 export const translations = {
+  cn: {
+    // Buttons
+    add_10_keys: 'Add 10 Keys',
+    add_100_keys: 'Add 100 Keys',
+    add_500_keys: 'Add 500 Keys',
+    draw_1: '抽一次',
+    draw_10: '抽十次',
+    view_all: '查看奖励',
+    
+    // Inventory / GiftBox
+    gift_box: '暂存箱',
+    inventory_title: '暂存箱',
+    inventory_empty: '暂存箱是空的',
+    go_gacha: '去抽奖',
+    clear_inventory: '清空仓库',
+    clear_confirm: '确定要清空仓库吗？此操作无法撤销。',
+    back: '返回',
+    all: '全部',
+    rare: '稀有',
+    medium: '普通',
+    low: '一般',
+    high: '稀有',
+    
+    // Home / Gacha
+    remaining_keys: '剩余钥匙：',
+    skip_animation: '中奖后不再单独弹出奖励弹窗',
+    total_spins: '当前已抽取:',
+    times: '次',
+    congrats: '恭喜您获得',
+    gacha_notice: '抽奖过程中请勿刷新页面或中断，请以实际礼包记录为准。',
+    receive_reward: '收下奖励 (OK)',
+    warm_tips: '温馨提示：',
+    warm_tips_content: '1.虚拟道具奖励将在24小时内发到您的游戏仓库，需您耐心等待与关注；2.由于数据量巨大，奖励道具显示可能有所延迟，或存在不展示的情况，请以礼包记录为准。',
+    keys_not_enough: '钥匙不足！请购买更多。',
+    
+    // Result Modal
+    item_amount: 'x',
+    
+    // Reward List Modal
+    reward_list: '奖励列表',
+    close: '关闭',
+    
+    // Item Names
+    items: {
+      '1': '神威核心x1',
+      '2': '神威天绫',
+      '3': '神威莲华',
+      '4': '炽芒蝶刃',
+      '5': '炽渊之怒',
+      '6': 'Scar Light-白虎',
+      '7': 'Scar Light-白虎 音效卡',
+      '8': '灵狐者-职业经理',
+      '9': '无影-华夏传说 皮肤',
+      '10': '降世魔童',
+      '11': '哪吒玩偶',
+      '12': '属性抽取券x1',
+      '13': '王者之石x10',
+      '14': '随机CF点宝箱',
+      '15': '金乌专属盲盒x1',
+      '16': '神威卡x1',
+      '17': '王者卡x1',
+      '18': '英雄卡x1',
+      '19': '道具卡x1',
+      '20': '金马卡x1',
+    }
+  },
   vi: {
     // Buttons
     add_10_keys: 'Thêm 10 khóa',

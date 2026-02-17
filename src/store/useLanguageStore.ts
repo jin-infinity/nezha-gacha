@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-type Language = 'vi' | 'en';
+type Language = 'cn' | 'vi' | 'en';
 
 interface LanguageState {
   language: Language;
@@ -11,7 +11,7 @@ interface LanguageState {
 export const useLanguageStore = create<LanguageState>()(
   persist(
     (set) => ({
-      language: 'vi',
+      language: 'cn', // Default to Chinese
       setLanguage: (lang) => set({ language: lang }),
     }),
     {
