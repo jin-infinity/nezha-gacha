@@ -5,6 +5,7 @@ import { ResultModal } from '@/components/ResultModal';
 import { RewardListModal } from '@/components/RewardListModal';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '@/hooks/useTranslation';
+import LanguageSelector from '@/components/LanguageSelector'; // Use the new component
 
 const RARE_GIF_IDS = ['1', '2', '3']; // IDs that trigger the GIF popup
 
@@ -150,19 +151,8 @@ const Home: React.FC = () => {
       {/* Floating Inventory Button & Language Selector */}
       <div className="fixed top-4 right-4 z-50 flex items-center gap-3">
            {/* Language Selector */}
-           <div className="bg-black/60 backdrop-blur-md rounded-full p-1 border border-white/30 flex shadow-lg">
-                <button 
-                    onClick={() => setLanguage('vi')} 
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${language === 'vi' ? 'bg-orange-500 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
-                >
-                    VN
-                </button>
-                <button 
-                    onClick={() => setLanguage('en')} 
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${language === 'en' ? 'bg-orange-500 text-white shadow-sm' : 'text-white/70 hover:text-white hover:bg-white/10'}`}
-                >
-                    EN
-                </button>
+           <div className="relative">
+             <LanguageSelector />
            </div>
 
            <Link to="/giftbox" className="bg-orange-500 text-white px-6 py-2 rounded-full text-md font-bold shadow-lg hover:bg-orange-600 transition-colors border-2 border-white flex items-center gap-2">

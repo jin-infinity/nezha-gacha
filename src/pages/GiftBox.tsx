@@ -3,6 +3,7 @@ import { useStore } from '@/store/useStore';
 import { Link } from 'react-router-dom';
 import { ITEMS, GachaItem } from '@/types';
 import { useTranslation } from '@/hooks/useTranslation';
+import LanguageSelector from '@/components/LanguageSelector'; // Use the new component
 
 const GiftBox: React.FC = () => {
   const { inventory, clearInventory } = useStore();
@@ -90,19 +91,8 @@ const GiftBox: React.FC = () => {
 
           <div className="flex flex-wrap gap-3 items-center justify-center">
              {/* Language Selector */}
-             <div className="flex bg-black/40 rounded-lg p-1 mr-4 border border-orange-900/30">
-                <button 
-                    onClick={() => setLanguage('vi')} 
-                    className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${language === 'vi' ? 'bg-orange-600 text-white shadow-md' : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'}`}
-                >
-                    VN
-                </button>
-                <button 
-                    onClick={() => setLanguage('en')} 
-                    className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${language === 'en' ? 'bg-orange-600 text-white shadow-md' : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'}`}
-                >
-                    EN
-                </button>
+             <div className="mr-4">
+                <LanguageSelector />
              </div>
 
              {/* Filter Tabs */}
