@@ -1,5 +1,6 @@
 import React from 'react';
 import { GachaItem as GachaItemType } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 
 interface Props {
   results: GachaItemType[];
@@ -8,6 +9,8 @@ interface Props {
 }
 
 export const ResultModal: React.FC<Props> = ({ results, onClose, isOpen }) => {
+  const { t, tItem } = useTranslation();
+
   if (!isOpen) return null;
 
   return (
@@ -27,11 +30,11 @@ export const ResultModal: React.FC<Props> = ({ results, onClose, isOpen }) => {
         <div className="text-center mb-6 mt-2">
           <div className="flex items-center justify-center gap-2 mb-2">
             <h2 className="text-4xl font-bold text-[#5c3a21] tracking-wide">
-              恭喜您获得
+              {t('congrats')}
             </h2>
           </div>
           <p className="text-[#8b5a3e] text-sm">
-            抽奖过程中请勿刷新页面或中断，请以实际礼包记录为准。
+            {t('gacha_notice')}
           </p>
         </div>
 
@@ -47,7 +50,7 @@ export const ResultModal: React.FC<Props> = ({ results, onClose, isOpen }) => {
                     ${results.length === 1 ? 'p-8 w-80 h-80' : 'p-4 w-48 aspect-[4/5]'}
                   `}
                 >
-                  <img src={item.image} alt={item.name} className="w-full h-full object-contain drop-shadow-md" />
+                  <img src={item.image} alt={tItem(item)} className="w-full h-full object-contain drop-shadow-md" />
                 </div>
                 {/* Label */}
                 <div 
@@ -56,7 +59,7 @@ export const ResultModal: React.FC<Props> = ({ results, onClose, isOpen }) => {
                     ${results.length === 1 ? 'text-xl mt-2' : 'text-sm px-1'}
                   `}
                 >
-                   {item.name} {(item.amount && !item.name.includes('CF点') && !item.name.includes('CF Point')) ? `x${item.amount}` : ''}
+                   {tItem(item)} {(item.amount && !item.name.includes('CF点') && !item.name.includes('CF Point')) ? `x${item.amount}` : ''}
                 </div>
               </div>
             ))}
@@ -66,7 +69,7 @@ export const ResultModal: React.FC<Props> = ({ results, onClose, isOpen }) => {
         {/* Footer Note */}
         <div className="mt-auto border-t border-orange-200 pt-4">
            <p className="text-[#8b5a3e] text-xs leading-relaxed text-left">
-             温馨提示：1.虚拟道具奖励将在24小时内发到您的游戏仓库，需您耐心等待与关注；2.由于数据量巨大，奖励道具显示可能有所延迟，或存在不展示的情况，请以礼包记录为准。
+             <span className="font-bold">{t('warm_tips')}</span> {t('warm_tips_content')}
            </p>
         </div>
       </div>

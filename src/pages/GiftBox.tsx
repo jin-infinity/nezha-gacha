@@ -2,13 +2,15 @@ import React, { useState, useMemo } from 'react';
 import { useStore } from '@/store/useStore';
 import { Link } from 'react-router-dom';
 import { ITEMS, GachaItem } from '@/types';
+import { useTranslation } from '@/hooks/useTranslation';
 
 const GiftBox: React.FC = () => {
   const { inventory, clearInventory } = useStore();
   const [filter, setFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all');
+  const { t, tItem, language, setLanguage } = useTranslation();
 
   const handleClear = () => {
-    if (window.confirm('Are you sure you want to clear your inventory? This action cannot be undone.')) {
+    if (window.confirm(t('clear_confirm'))) {
       clearInventory();
     }
   };
@@ -82,11 +84,27 @@ const GiftBox: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 bg-[#2d1b12]/80 p-4 rounded-xl border border-orange-900/50 shadow-lg backdrop-blur-sm">
           <div className="flex items-center gap-4 mb-4 md:mb-0">
             <h1 className="text-3xl font-bold text-orange-400 flex items-center gap-2 drop-shadow-md">
-              <span className="text-4xl">🎁</span> 暂存箱 <span className="text-sm text-orange-200/60 font-normal mt-2">(Inventory)</span>
+              <span className="text-4xl">🎁</span> {t('inventory_title')}
             </h1>
           </div>
 
           <div className="flex flex-wrap gap-3 items-center justify-center">
+             {/* Language Selector */}
+             <div className="flex bg-black/40 rounded-lg p-1 mr-4 border border-orange-900/30">
+                <button 
+                    onClick={() => setLanguage('vi')} 
+                    className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${language === 'vi' ? 'bg-orange-600 text-white shadow-md' : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'}`}
+                >
+                    VN
+                </button>
+                <button 
+                    onClick={() => setLanguage('en')} 
+                    className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${language === 'en' ? 'bg-orange-600 text-white shadow-md' : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'}`}
+                >
+                    EN
+                </button>
+             </div>
+
              {/* Filter Tabs */}
              <div className="flex bg-black/40 rounded-lg p-1 mr-4 border border-orange-900/30">
                 {(['all', 'high', 'medium', 'low'] as const).map((f) => (
@@ -99,9 +117,7 @@ const GiftBox: React.FC = () => {
                         : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'
                     }`}
                   >
-                    {f === 'all' ? '全部 (All)' : 
-                     f === 'high' ? '稀有 (Rare)' : 
-                     f === 'medium' ? '普通 (Common)' : '卡片 (Cards)'}
+                    {t(f)}
                   </button>
                 ))}
              </div>
@@ -111,14 +127,14 @@ const GiftBox: React.FC = () => {
                 onClick={handleClear}
                 className="bg-red-600/80 hover:bg-red-600 text-white px-5 py-2 rounded-lg transition-all font-bold text-sm shadow-md border border-red-500/50 flex items-center gap-2"
               >
-                <span>🗑️</span> 清空 (Clear)
+                <span>🗑️</span> {t('clear_inventory')}
               </button>
             )}
             <Link 
               to="/" 
               className="bg-orange-500 hover:bg-orange-400 text-white px-6 py-2 rounded-lg transition-all font-bold shadow-md border border-orange-400/50 flex items-center gap-2"
             >
-              ↩️ 返回 (Back)
+              ↩️ {t('back')}
             </Link>
           </div>
         </div>
@@ -128,10 +144,9 @@ const GiftBox: React.FC = () => {
           {sortedAndFilteredInventory.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-[#8b5a3e]/60 py-32">
               <div className="text-7xl mb-6 opacity-50">📦</div>
-              <p className="text-2xl font-bold mb-2">暂存箱是空的</p>
-              <p className="text-sm mb-8">Empty Inventory</p>
+              <p className="text-2xl font-bold mb-2">{t('inventory_empty')}</p>
               <Link to="/" className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-8 py-3 rounded-full hover:shadow-lg hover:scale-105 transition-all font-bold text-lg">
-                去抽奖 (Go Gacha)
+                {t('go_gacha')}
               </Link>
             </div>
           ) : (
@@ -167,7 +182,7 @@ const GiftBox: React.FC = () => {
                   <div className="relative w-full aspect-square mb-2 flex items-center justify-center overflow-hidden rounded-lg bg-contain bg-center bg-no-repeat transition-transform group-hover:scale-110 duration-300">
                     <img 
                       src={entry.item.image} 
-                      alt={entry.item.name} 
+                      alt={tItem(entry.item)} 
                       className="w-full h-full object-contain drop-shadow-md" 
                     />
                   </div>
@@ -178,7 +193,7 @@ const GiftBox: React.FC = () => {
                       text-xs font-bold line-clamp-2 h-8 flex items-center justify-center leading-tight px-1
                       ${entry.item.rarity === 'high' ? 'text-[#8b5a3e]' : 'text-gray-700'}
                     `}>
-                      {entry.item.name}
+                      {tItem(entry.item)}
                     </div>
                   </div>
                 </div>
