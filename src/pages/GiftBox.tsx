@@ -91,7 +91,7 @@ const GiftBox: React.FC = () => {
 
           <div className="flex flex-wrap gap-3 items-center justify-center">
              {/* Language Selector */}
-             <div className="mr-4">
+             <div className="mr-4 relative z-50">
                 <LanguageSelector />
              </div>
 

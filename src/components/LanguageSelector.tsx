@@ -24,7 +24,7 @@ const LanguageSelector: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl overflow-hidden shadow-2xl z-[100] min-w-[160px]">
+        <div className="absolute top-full right-0 mt-2 bg-black/95 backdrop-blur-xl border border-white/20 rounded-xl overflow-hidden shadow-2xl z-[999] min-w-[160px]">
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -45,7 +45,7 @@ const LanguageSelector: React.FC = () => {
       {/* Click outside to close overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 z-[90]" 
+          className="fixed inset-0 z-[998]" 
           onClick={() => setIsOpen(false)}
         />
       )}
