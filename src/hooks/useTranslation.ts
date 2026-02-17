@@ -2,11 +2,15 @@ import { useLanguageStore } from '@/store/useLanguageStore';
 import { translations } from '@/i18n/locales';
 import { GachaItem } from '@/types';
 
+// Define keys that map to strings only, excluding 'items' object
+type TranslationKeys = Exclude<keyof typeof translations['vi'], 'items'>;
+
 export const useTranslation = () => {
   const { language, setLanguage } = useLanguageStore();
   
-  const t = (key: keyof typeof translations['vi']) => {
-    return translations[language][key] || key;
+  const t = (key: TranslationKeys) => {
+    // Force cast to string because we excluded non-string keys
+    return (translations[language][key] as unknown as string) || key;
   };
   
   const tItem = (item: GachaItem) => {
@@ -19,7 +23,9 @@ export const useTranslation = () => {
     }
 
     // Use translation map for standard items
-    const translatedName = translations[language].items[item.id as keyof typeof translations['vi']['items']];
+    // Cast items object to allow string indexing since item.id is string
+    const itemsMap = translations[language].items as Record<string, string>;
+    const translatedName = itemsMap[item.id];
     return translatedName || item.name;
   };
 
