@@ -10,12 +10,11 @@ import LanguageSelector from '@/components/LanguageSelector'; // Use the new com
 const RARE_GIF_IDS = ['1', '2', '3']; // IDs that trigger the GIF popup
 
 const Home: React.FC = () => {
-  const { keys, addKeys, pullGacha, totalSpins } = useStore();
+  const { keys, addKeys, pullGacha, totalSpins, skipAnimation, setSkipAnimation } = useStore();
   const [result, setResult] = useState<GachaItemType[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRewardListOpen, setIsRewardListOpen] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [skipAnim, setSkipAnim] = useState(false);
   
   const { t, tItem, language, setLanguage } = useTranslation();
 
@@ -25,7 +24,7 @@ const Home: React.FC = () => {
 
   const processGachaResults = (results: GachaItemType[]) => {
     // If "Skip Animation" is checked, show full results immediately
-    if (skipAnim) {
+    if (skipAnimation) {
       setResult(results);
       setIsModalOpen(true);
       return;
@@ -83,7 +82,7 @@ const Home: React.FC = () => {
     setIsSpinning(true);
     
     // Simulate spin delay
-    await new Promise(resolve => setTimeout(resolve, skipAnim ? 100 : 800));
+    await new Promise(resolve => setTimeout(resolve, skipAnimation ? 100 : 800));
 
     const results = pullGacha(count);
     processGachaResults(results);
@@ -135,8 +134,8 @@ const Home: React.FC = () => {
               {/* Info */}
               <div className="txt_box2">
                  <p className="txt_num1">{t('remaining_keys')} <span className="jf_7929">{keys}</span></p>
-                 <div className="txt_box3" onClick={() => setSkipAnim(!skipAnim)}>
-                     <a className={skipAnim ? "cur" : ""}></a>
+                 <div className="txt_box3" onClick={() => setSkipAnimation(!skipAnimation)}>
+                     <a className={skipAnimation ? "cur" : ""}></a>
                      <p>{t('skip_animation')}</p>
                  </div>
               </div>

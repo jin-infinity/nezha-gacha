@@ -6,10 +6,12 @@ interface GachaState {
   keys: number;
   totalSpins: number;
   inventory: InventoryItem[];
+  skipAnimation: boolean;
   addKeys: (amount: number) => void;
   removeKeys: (amount: number) => void;
   pullGacha: (count: number) => GachaItem[];
   clearInventory: () => void;
+  setSkipAnimation: (skip: boolean) => void;
 }
 
 // CF Point Chest ID from ITEMS
@@ -49,9 +51,11 @@ export const useStore = create<GachaState>()(
       keys: 0,
       totalSpins: 0,
       inventory: [],
+      skipAnimation: false,
       addKeys: (amount) => set((state) => ({ keys: state.keys + amount })),
       removeKeys: (amount) => set((state) => ({ keys: Math.max(0, state.keys - amount) })),
-      clearInventory: () => set({ inventory: [], totalSpins: 0 }), // Also reset totalSpins on clear as requested ("reset toàn bộ")
+      clearInventory: () => set({ inventory: [], totalSpins: 0 }),
+      setSkipAnimation: (skip) => set({ skipAnimation: skip }),
       
       pullGacha: (count) => {
         const { keys, removeKeys, totalSpins } = get();
