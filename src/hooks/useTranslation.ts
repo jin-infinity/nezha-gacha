@@ -2,8 +2,8 @@ import { useLanguageStore } from '@/store/useLanguageStore';
 import { translations } from '@/i18n/locales';
 import { GachaItem } from '@/types';
 
-// Define keys that map to strings only, excluding 'items' object
-type TranslationKeys = Exclude<keyof typeof translations['vi'], 'items'>;
+// Define keys that map to strings only, excluding 'items' and 'badges' objects
+type TranslationKeys = Exclude<keyof typeof translations['vi'], 'items' | 'badges'>;
 
 export const useTranslation = () => {
   const { language, setLanguage } = useLanguageStore();
@@ -29,5 +29,28 @@ export const useTranslation = () => {
     return translatedName || item.name;
   };
 
-  return { t, tItem, language, setLanguage };
+  const tBadge = (badge: string) => {
+    if (!badge) return '';
+    
+    const badgesMap = translations[language].badges as Record<string, string>;
+    
+    // Map raw badge text to translation keys
+    // This is a simple mapping based on known badge strings in Chinese
+    const keyMap: Record<string, string> = {
+      '首发': 'first_release',
+      '不可交易': 'not_tradable',
+      '唯一性': 'unique',
+      '极稀有': 'rare'
+    };
+
+    // Split badge by ' | ' if it contains multiple badges
+    const parts = badge.split(' | ');
+    
+    return parts.map(part => {
+      const key = keyMap[part.trim()] || '';
+      return badgesMap[key] || part;
+    }).join(' | ');
+  };
+
+  return { t, tItem, tBadge, language, setLanguage };
 };

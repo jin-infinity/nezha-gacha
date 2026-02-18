@@ -63,6 +63,13 @@ export const translations = {
       '18': '英雄卡x1',
       '19': '道具卡x1',
       '20': '金马卡x1',
+    },
+    // Badge translations
+    badges: {
+      'first_release': '首发',
+      'not_tradable': '不可交易',
+      'unique': '唯一性',
+      'rare': '极稀有'
     }
   },
   vi: {
@@ -129,6 +136,13 @@ export const translations = {
       '18': 'Thẻ Anh Hùng x1',
       '19': 'Thẻ Đạo Cụ x1',
       '20': 'Thẻ Kim Mã x1',
+    },
+    // Badge translations
+    badges: {
+      'first_release': 'Ra mắt đầu tiên',
+      'not_tradable': 'Không thể giao dịch',
+      'unique': 'Duy nhất',
+      'rare': 'Cực hiếm'
     }
   },
   en: {
@@ -195,6 +209,13 @@ export const translations = {
       '18': 'Hero Card x1',
       '19': 'Item Card x1',
       '20': 'Golden Horse Card x1',
+    },
+    // Badge translations
+    badges: {
+      'first_release': 'First Release',
+      'not_tradable': 'Not Tradable',
+      'unique': 'Unique',
+      'rare': 'Super Rare'
     }
   }
 };

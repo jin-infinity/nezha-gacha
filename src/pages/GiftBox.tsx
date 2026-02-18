@@ -8,7 +8,7 @@ import LanguageSelector from '@/components/LanguageSelector'; // Use the new com
 const GiftBox: React.FC = () => {
   const { inventory, clearInventory } = useStore();
   const [filter, setFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all');
-  const { t, tItem, language, setLanguage } = useTranslation();
+  const { t, tItem, tBadge, language, setLanguage } = useTranslation();
 
   const handleClear = () => {
     if (window.confirm(t('clear_confirm'))) {
@@ -159,7 +159,7 @@ const GiftBox: React.FC = () => {
                   {/* Badge */}
                   {entry.item.badge && (
                     <div className="absolute -top-2 -left-2 z-20 bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full shadow-sm font-bold tracking-tighter border border-white">
-                      {entry.item.badge}
+                      {tBadge(entry.item.badge)}
                     </div>
                   )}
 
