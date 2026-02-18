@@ -14,9 +14,15 @@ export const ResultModal: React.FC<Props> = ({ results, onClose, isOpen }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+      onClick={onClose} // Close on click outside
+    >
       {/* Modal Container */}
-      <div className="relative w-[1000px] bg-[#fff5e6] rounded-2xl border-4 border-orange-200 shadow-2xl overflow-hidden px-8 py-6 flex flex-col min-h-[500px]">
+      <div 
+        className="relative w-[1000px] bg-[#fff5e6] rounded-2xl border-4 border-orange-200 shadow-2xl overflow-hidden px-8 py-6 flex flex-col min-h-[500px]"
+        onClick={(e) => e.stopPropagation()} // Prevent close on click inside
+      >
         
         {/* Close Button */}
         <button 

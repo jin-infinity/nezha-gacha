@@ -9,8 +9,16 @@ export const RewardListModal: React.FC<RewardListModalProps> = ({ isOpen, onClos
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative max-w-4xl w-full p-4" onClick={e => e.stopPropagation()}>
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+      onClick={onClose} // Close on click outside
+    >
+      {/* Modal Container */}
+      <div 
+        className="relative w-[1000px] h-[80vh] bg-[#fff5e6] rounded-2xl border-4 border-orange-200 shadow-2xl overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()} // Prevent close on click inside
+      >
+        {/* Header */}
         <button 
           onClick={onClose}
           className="absolute -top-10 right-0 text-white hover:text-orange-400 transition-colors"

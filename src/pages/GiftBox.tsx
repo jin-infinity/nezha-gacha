@@ -25,17 +25,19 @@ const GiftBox: React.FC = () => {
   // Helper to categorize items for sorting
   const getItemCategoryOrder = (item: GachaItem): number => {
     const name = item.name;
-    // 1. Characters (Highest priority)
+    // 1. Infinity (ID 1, 2, 3) - Highest priority
+    if (['1', '2', '3'].includes(item.id)) return 0;
+    // 2. Characters
     if (name.includes('灵狐者') || name.includes('角色')) return 1;
-    // 2. Weapons
+    // 3. Weapons
     if (name.includes('Scar') || name.includes('无影') || name.includes('神威') || name.includes('烈渊') || name.includes('蝶刃')) return 2;
-    // 3. Dolls/Accessories
+    // 4. Dolls/Accessories
     if (name.includes('玩偶') || name.includes('魔童') || name.includes('音效卡')) return 3;
-    // 4. Valuable Items (Keys, Stones, High CF Points)
+    // 5. Valuable Items (Keys, Stones, High CF Points)
     if (name.includes('王者之石') || name.includes('钥匙') || name.includes('保护券') || name.includes('属性')) return 4;
-    // 5. CF Points & Boxes
+    // 6. CF Points & Boxes
     if (name.includes('CF点') || name.includes('宝箱') || name.includes('盲盒')) return 5;
-    // 6. Cards (Low Tier)
+    // 7. Cards (Low Tier)
     if (name.includes('卡')) return 6;
     
     return 99; // Others
@@ -52,7 +54,11 @@ const GiftBox: React.FC = () => {
 
     // 2. Filter
     if (filter !== 'all') {
-      items = items.filter(entry => entry.item.rarity === filter);
+      if (filter === 'infinity') {
+        items = items.filter(entry => ['1', '2', '3'].includes(entry.item.id));
+      } else {
+        items = items.filter(entry => entry.item.rarity === filter);
+      }
     }
 
     // 3. Sort
@@ -97,17 +103,17 @@ const GiftBox: React.FC = () => {
 
              {/* Filter Tabs */}
              <div className="flex bg-black/40 rounded-lg p-1 mr-4 border border-orange-900/30">
-                {(['all', 'high', 'medium', 'low'] as const).map((f) => (
+                {(['all', 'infinity', 'high', 'medium', 'low'] as const).map((f) => (
                   <button
                     key={f}
-                    onClick={() => setFilter(f)}
+                    onClick={() => setFilter(f as any)}
                     className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                       filter === f 
                         ? 'bg-orange-600 text-white shadow-md' 
                         : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'
                     }`}
                   >
-                    {t(f)}
+                    {t(f as any)}
                   </button>
                 ))}
              </div>
@@ -146,14 +152,15 @@ const GiftBox: React.FC = () => {
                   key={idx} 
                   className={`
                     group relative rounded-xl p-2 border-2 shadow-sm flex flex-col items-center transition-all hover:scale-105 hover:shadow-xl hover:z-10 bg-white
-                    ${entry.item.rarity === 'high' ? 'border-yellow-400 bg-yellow-50/50' : 
+                    ${['1', '2', '3'].includes(entry.item.id) ? 'border-red-500 bg-red-50/50' : 
+                      entry.item.rarity === 'high' ? 'border-yellow-400 bg-yellow-50/50' : 
                       entry.item.rarity === 'medium' ? 'border-blue-300 bg-blue-50/50' : 
                       'border-gray-300 bg-gray-50/50'}
                   `}
                 >
                   {/* Rarity Glow */}
                   {entry.item.rarity === 'high' && (
-                    <div className="absolute inset-0 rounded-xl bg-yellow-400/10 animate-pulse pointer-events-none"></div>
+                    <div className={`absolute inset-0 rounded-xl ${['1', '2', '3'].includes(entry.item.id) ? 'bg-red-500/10' : 'bg-yellow-400/10'} animate-pulse pointer-events-none`}></div>
                   )}
 
                   {/* Badge */}

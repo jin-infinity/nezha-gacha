@@ -161,9 +161,15 @@ const Home: React.FC = () => {
 
       {/* Rare Item GIF Popup */}
       {currentRareItem && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div 
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+          onClick={handleRarePopupClose} // Close on click outside
+        >
            {/* Modal Container */}
-           <div className="relative w-[1000px] bg-[#fff5e6] rounded-2xl border-4 border-orange-200 shadow-2xl overflow-hidden px-8 py-6 flex flex-col min-h-[500px] animate-in fade-in zoom-in duration-300">
+           <div 
+             className="relative w-[1000px] bg-[#fff5e6] rounded-2xl border-4 border-orange-200 shadow-2xl overflow-hidden px-8 py-6 flex flex-col min-h-[500px] animate-in fade-in zoom-in duration-300"
+             onClick={(e) => e.stopPropagation()} // Prevent close on click inside
+           >
               
               {/* Header Section */}
               <div className="text-center mb-6 mt-2">
