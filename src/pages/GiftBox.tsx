@@ -7,7 +7,7 @@ import LanguageSelector from '@/components/LanguageSelector'; // Use the new com
 
 const GiftBox: React.FC = () => {
   const { inventory, clearInventory } = useStore();
-  const [filter, setFilter] = useState<'all' | 'high' | 'medium' | 'low'>('all');
+  const [filter, setFilter] = useState<'all' | 'infinity' | 'high' | 'medium' | 'low'>('all');
   const { t, tItem, tBadge, language, setLanguage } = useTranslation();
 
   const handleClear = () => {
