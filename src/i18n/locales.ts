@@ -18,10 +18,10 @@ export const translations = {
     back: '返回',
     all: '全部',
     infinity: '传说',
-    rare: '稀有',
+    rare: '史诗',
     medium: '普通',
     low: '一般',
-    high: '稀有',
+    high: '史诗',
     
     // Home / Gacha
     remaining_keys: '剩余钥匙：',
@@ -92,10 +92,10 @@ export const translations = {
     back: 'Quay lại',
     all: 'Tất cả',
     infinity: 'Huyền Thoại',
-    rare: 'Hiếm',
+    rare: 'Epic',
     medium: 'Trung bình',
     low: 'Thường',
-    high: 'Hiếm',
+    high: 'Epic',
     
     // Home / Gacha
     remaining_keys: 'Số khóa còn lại:',
@@ -166,10 +166,10 @@ export const translations = {
     back: 'Back',
     all: 'All',
     infinity: 'Infinity',
-    rare: 'Rare',
+    rare: 'Epic',
     medium: 'Medium',
     low: 'Common',
-    high: 'Rare',
+    high: 'Epic',
     
     // Home / Gacha
     remaining_keys: 'Remaining Keys:',

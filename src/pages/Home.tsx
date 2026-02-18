@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from '@/store/useStore';
-import { GachaItem as GachaItemType } from '@/types';
+import { GachaItem as GachaItemType, ITEMS } from '@/types';
 import { ResultModal } from '@/components/ResultModal';
 import { RewardListModal } from '@/components/RewardListModal';
 import { Link } from 'react-router-dom';
@@ -116,10 +116,25 @@ const Home: React.FC = () => {
 
           {/* Game Interface */}
           <div className="lotty">
-              {/* Decorative GIFs */}
-              <div className="gift_1"><img src="/images/gift_1.gif" alt="" /></div>
-              <div className="gift_2"><img src="/images/gift_2.gif" alt="" /></div>
-              <div className="gift_3"><img src="/images/gift_3.gif" alt="" /></div>
+              {/* Decorative GIFs with Translated Names */}
+              <div className="gift_1 relative group">
+                  <img src="/images/gift_1.gif" alt={tItem(ITEMS.find(i => i.id === '1')!)} />
+                  <div className="absolute bottom-2 left-0 right-0 text-center text-white text-sm font-bold drop-shadow-md bg-black/30 rounded px-1">
+                      {tItem(ITEMS.find(i => i.id === '1')!)}
+                  </div>
+              </div>
+              <div className="gift_2 relative group">
+                  <img src="/images/gift_2.gif" alt={tItem(ITEMS.find(i => i.id === '2')!)} />
+                  <div className="absolute bottom-2 left-0 right-0 text-center text-white text-sm font-bold drop-shadow-md bg-black/30 rounded px-1">
+                      {tItem(ITEMS.find(i => i.id === '2')!)}
+                  </div>
+              </div>
+              <div className="gift_3 relative group">
+                  <img src="/images/gift_3.gif" alt={tItem(ITEMS.find(i => i.id === '3')!)} />
+                  <div className="absolute bottom-2 left-0 right-0 text-center text-white text-sm font-bold drop-shadow-md bg-black/30 rounded px-1">
+                      {tItem(ITEMS.find(i => i.id === '3')!)}
+                  </div>
+              </div>
               
               {/* Buttons */}
               <a className="btn_cj1" onClick={() => !isSpinning && handlePull(1)} title={t('draw_1')}></a>

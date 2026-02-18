@@ -199,14 +199,14 @@ const GiftBox: React.FC = () => {
                   className={`
                     group relative rounded-xl p-2 border-2 shadow-sm flex flex-col items-center transition-all hover:scale-105 hover:shadow-xl hover:z-10 bg-white
                     ${['1', '2', '3'].includes(entry.item.id) ? 'border-red-500 bg-red-50/50' : 
-                      entry.item.rarity === 'high' ? 'border-yellow-400 bg-yellow-50/50' : 
+                      entry.item.rarity === 'high' ? 'border-yellow-500 bg-yellow-100/60' : 
                       entry.item.rarity === 'medium' ? 'border-blue-300 bg-blue-50/50' : 
                       'border-gray-300 bg-gray-50/50'}
                   `}
-                >
+                  >
                   {/* Rarity Glow */}
                   {entry.item.rarity === 'high' && (
-                    <div className={`absolute inset-0 rounded-xl ${['1', '2', '3'].includes(entry.item.id) ? 'bg-red-500/10' : 'bg-yellow-400/10'} animate-pulse pointer-events-none`}></div>
+                    <div className={`absolute inset-0 rounded-xl ${['1', '2', '3'].includes(entry.item.id) ? 'bg-red-500/10' : 'bg-yellow-400/20'} animate-pulse pointer-events-none`}></div>
                   )}
 
                   {/* Badge */}
