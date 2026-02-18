@@ -25,20 +25,29 @@ const GiftBox: React.FC = () => {
   // Helper to categorize items for sorting
   const getItemCategoryOrder = (item: GachaItem): number => {
     const name = item.name;
-    // 1. Infinity (ID 1, 2, 3) - Highest priority
+    
+    // Infinity (ID 1, 2, 3) - Highest priority
     if (['1', '2', '3'].includes(item.id)) return 0;
+
+    // Rare category specific items:
+    // 15: Golden Crow Blind Box
+    // 17: King Card
+    // 18: Hero Card
+    // 16: Shenwei Card
+    if (['15', '16', '17', '18'].includes(item.id)) return 1;
+
     // 2. Characters
-    if (name.includes('灵狐者') || name.includes('角色')) return 1;
+    if (name.includes('灵狐者') || name.includes('角色')) return 2;
     // 3. Weapons
-    if (name.includes('Scar') || name.includes('无影') || name.includes('神威') || name.includes('烈渊') || name.includes('蝶刃')) return 2;
+    if (name.includes('Scar') || name.includes('无影') || name.includes('神威') || name.includes('烈渊') || name.includes('蝶刃')) return 3;
     // 4. Dolls/Accessories
-    if (name.includes('玩偶') || name.includes('魔童') || name.includes('音效卡')) return 3;
+    if (name.includes('玩偶') || name.includes('魔童') || name.includes('音效卡')) return 4;
     // 5. Valuable Items (Keys, Stones, High CF Points)
-    if (name.includes('王者之石') || name.includes('钥匙') || name.includes('保护券') || name.includes('属性')) return 4;
+    if (name.includes('王者之石') || name.includes('钥匙') || name.includes('保护券') || name.includes('属性')) return 5;
     // 6. CF Points & Boxes
-    if (name.includes('CF点') || name.includes('宝箱') || name.includes('盲盒')) return 5;
+    if (name.includes('CF点') || name.includes('宝箱') || name.includes('盲盒')) return 6;
     // 7. Cards (Low Tier)
-    if (name.includes('卡')) return 6;
+    if (name.includes('卡')) return 7;
     
     return 99; // Others
   };
@@ -57,7 +66,30 @@ const GiftBox: React.FC = () => {
       if (filter === 'infinity') {
         items = items.filter(entry => ['1', '2', '3'].includes(entry.item.id));
       } else {
-        items = items.filter(entry => entry.item.rarity === filter);
+        // Only show items that match the rarity AND are NOT infinity items
+        // unless they are explicitly in the infinity filter (handled above)
+        
+        // Special Case: Move specific Medium items to "High" filter tab visually
+        // 15: Golden Crow Blind Box
+        // 17: King Card
+        // 18: Hero Card
+        // 16: Shenwei Card
+        const specialHighItems = ['15', '16', '17', '18'];
+        
+        if (filter === 'high') {
+           items = items.filter(entry => 
+             (entry.item.rarity === 'high' || specialHighItems.includes(entry.item.id)) 
+             && !['1', '2', '3'].includes(entry.item.id)
+           );
+        } else if (filter === 'medium') {
+           items = items.filter(entry => 
+             entry.item.rarity === 'medium' 
+             && !specialHighItems.includes(entry.item.id)
+             && !['1', '2', '3'].includes(entry.item.id)
+           );
+        } else {
+           items = items.filter(entry => entry.item.rarity === filter && !['1', '2', '3'].includes(entry.item.id));
+        }
       }
     }
 
@@ -70,8 +102,22 @@ const GiftBox: React.FC = () => {
 
       // Then by Rarity (High -> Low)
       const rarityOrder = { high: 0, medium: 1, low: 2 };
-      if (rarityOrder[a.item.rarity] !== rarityOrder[b.item.rarity]) {
-        return rarityOrder[a.item.rarity] - rarityOrder[b.item.rarity];
+      
+      // Override rarity for specific items to be treated as "High" priority in sorting
+      // 15: Golden Crow Blind Box
+      // 17: King Card
+      // 18: Hero Card
+      // 16: Shenwei Card
+      const getEffectiveRarity = (item: GachaItem) => {
+        if (['15', '16', '17', '18'].includes(item.id)) return 0; // Treat as High
+        return rarityOrder[item.rarity];
+      };
+
+      const rarityA = getEffectiveRarity(a.item);
+      const rarityB = getEffectiveRarity(b.item);
+
+      if (rarityA !== rarityB) {
+        return rarityA - rarityB;
       }
 
       // Then by Name
