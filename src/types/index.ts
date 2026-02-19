@@ -43,7 +43,7 @@ export const ITEMS: GachaItem[] = [
   { id: '13', name: '王者之石x10', image: '/images/kingstone.PNG', rarity: 'medium', probability: 1.00, isDisplayedInPool: false },
   { id: '14', name: '随机CF点宝箱', image: '/images/cfp.png', rarity: 'medium', probability: 5.54, isDisplayedInPool: true },
   { id: '15', name: '金乌专属盲盒x1', image: '/images/polc18.png', rarity: 'medium', probability: 2.00, isDisplayedInPool: true },
-  { id: '16', name: '神威卡x1', image: '/images/zome1(1).png', rarity: 'medium', probability: 0.10, isDisplayedInPool: false },
+  { id: '16', name: '神威卡x1', image: '/images/zome1.png', rarity: 'high', probability: 0.10, isDisplayedInPool: false },
   { id: '17', name: '王者卡x1', image: '/images/zome2.png', rarity: 'medium', probability: 2.00, isDisplayedInPool: false },
   { id: '18', name: '英雄卡x1', image: '/images/zome3.png', rarity: 'medium', probability: 5.00, isDisplayedInPool: false },
 
