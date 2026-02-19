@@ -6,6 +6,7 @@ import { RewardListModal } from '@/components/RewardListModal';
 import { Link } from 'react-router-dom';
 import { useTranslation } from '@/hooks/useTranslation';
 import LanguageSelector from '@/components/LanguageSelector'; // Use the new component
+import { Footer } from '@/components/Footer';
 
 const RARE_GIF_IDS = ['1', '2', '3']; // IDs that trigger the GIF popup
 
@@ -16,7 +17,7 @@ const Home: React.FC = () => {
   const [isRewardListOpen, setIsRewardListOpen] = useState(false);
   const [isSpinning, setIsSpinning] = useState(false);
   
-  const { t, tItem, language, setLanguage } = useTranslation();
+  const { t, tItem } = useTranslation();
 
   // State for Rare Item Popup
   const [rareItemQueue, setRareItemQueue] = useState<GachaItemType[]>([]);
@@ -173,6 +174,16 @@ const Home: React.FC = () => {
              <span>🎁</span> {t('gift_box')}
            </Link>
       </div>
+
+       {/* QR Code Donation */}
+       <div className="w-full flex justify-center py-8 bg-black/40 backdrop-blur-sm mt-8 border-t border-orange-900/30">
+          <div className="bg-white p-4 rounded-xl shadow-2xl max-w-xs transform hover:scale-105 transition-transform duration-300">
+             <img src="/images/qr.jpg" alt="Donation QR Code" className="w-full h-auto rounded-lg border-2 border-orange-200" />
+             <p className="text-center mt-2 text-gray-600 font-bold text-sm">Donate to support the project ❤️</p>
+          </div>
+       </div>
+
+       <Footer />
 
       {/* Rare Item GIF Popup */}
       {currentRareItem && (

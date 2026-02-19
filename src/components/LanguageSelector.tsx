@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLanguageStore } from '@/store/useLanguageStore';
+import { useLanguageStore, Language } from '@/store/useLanguageStore';
 
 const LanguageSelector: React.FC = () => {
   const { language, setLanguage } = useLanguageStore();
@@ -29,7 +29,7 @@ const LanguageSelector: React.FC = () => {
             <button
               key={lang.code}
               onClick={() => {
-                setLanguage(lang.code as any);
+                setLanguage(lang.code as Language);
                 setIsOpen(false);
               }}
               className={`w-full text-left px-4 py-3 text-sm font-medium transition-colors hover:bg-white/10 ${

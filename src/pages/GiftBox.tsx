@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { ITEMS, GachaItem } from '@/types';
 import { useTranslation } from '@/hooks/useTranslation';
 import LanguageSelector from '@/components/LanguageSelector'; // Use the new component
+import { Footer } from '@/components/Footer';
 
 const GiftBox: React.FC = () => {
   const { inventory, clearInventory } = useStore();
   const [filter, setFilter] = useState<'all' | 'infinity' | 'high' | 'medium' | 'low'>('all');
-  const { t, tItem, tBadge, language, setLanguage } = useTranslation();
+  const { t, tItem, tBadge } = useTranslation();
 
   const handleClear = () => {
     if (window.confirm(t('clear_confirm'))) {
@@ -152,14 +153,14 @@ const GiftBox: React.FC = () => {
                 {(['all', 'infinity', 'high', 'medium', 'low'] as const).map((f) => (
                   <button
                     key={f}
-                    onClick={() => setFilter(f as any)}
+                    onClick={() => setFilter(f)}
                     className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
                       filter === f 
                         ? 'bg-orange-600 text-white shadow-md' 
                         : 'text-orange-200/70 hover:text-orange-100 hover:bg-white/5'
                     }`}
                   >
-                    {t(f as any)}
+                    {t(f)}
                   </button>
                 ))}
              </div>
@@ -243,6 +244,10 @@ const GiftBox: React.FC = () => {
               ))}
             </div>
           )}
+        </div>
+        
+        <div className="mt-8">
+            <Footer />
         </div>
       </div>
     </div>
