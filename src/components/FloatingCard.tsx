@@ -61,7 +61,7 @@ export const FloatingCard: React.FC = () => {
             
             <h3 className="text-xl font-bold text-gray-800 mb-4">Scan QR Code</h3>
             
-            <div className="w-64 h-64 bg-white p-2 border-2 border-orange-200 rounded-lg mb-4">
+            <div className="w-96 h-96 bg-white p-2 border-2 border-orange-200 rounded-lg mb-4 max-w-full">
               <img src="/images/qr.jpg" alt="Large QR Code" className="w-full h-full object-contain" />
             </div>
             
