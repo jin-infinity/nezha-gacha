@@ -93,7 +93,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col items-center">
+    <div className="min-h-screen relative flex flex-col items-center min-w-[1200px] md:min-w-full">
        {/* Video Header - Top Flow */}
        <div className="hdvd shrink-0">
            <video className="hd_video" id="myVideo" autoPlay muted loop playsInline>
